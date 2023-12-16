@@ -21,14 +21,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            // Clean up, stop and remove the Docker container
-            script {
-                sh 'docker stop hello-container || true'
-                sh 'docker rm hello-container || true'
-            }
-        }
-    }
-}
+ }
