@@ -2,17 +2,32 @@ pipeline {
     agent any
 
     stages {
-        stage('Deploy to Nginx') {
+        
+        stage('Build Docker Image') {
             steps {
-                // Copy the Python script to the Nginx web root directory
+                // Build the Docker image
                 script {
-                    sh 'sudo cp hello.py /usr/share/nginx/html/'
+                    sh 'docker build -t hello-app .'
                 }
+            }
+        }
 
-                // Restart Nginx to apply changes
+        stage('Deploy Docker Container') {
+            steps {
+                // Run the Docker container and expose it on port 80
                 script {
-                    sh 'sudo systemctl restart nginx'
+                    sh 'docker run -d -p 80:80 --name hello-container hello-app'
                 }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up, stop and remove the Docker container
+            script {
+                sh 'docker stop hello-container || true'
+                sh 'docker rm hello-container || true'
             }
         }
     }
