@@ -2,21 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Expose on Port 80') {
+        stage('Deploy to Nginx') {
             steps {
-                // Start a simple web server on port 80
+                // Copy the content to Nginx web root directory
                 script {
-                    sh 'python -m http.server 80 &'
+                    sh 'sudo cp -r * /usr/share/nginx/html/'
                 }
-            }
-        }
-    }
 
-    post {
-        always {
-            // Clean up, stop the web server (if running)
-            script {
-                sh 'pkill -f "python -m http.server"'
+                // Restart Nginx to apply changes
+                script {
+                    sh 'sudo systemctl restart nginx'
+                }
             }
         }
     }
