@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Run Docker container and map port 80
-                    sh 'docker run -d -p 80:80 --name hello-chatgpt-container-test-1 hello-chatgpt'
+                    sh 'docker run -d -p 80:80 --name hello-chatgpt-container-test-2 hello-chatgpt'
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
         always {
             // Cleanup: Remove the Docker container
             cleanup {
-                sh 'docker rm -f hello-chatgpt-container-test-1 || true'
+                sh 'docker rm -f hello-chatgpt-container-test-2 || true'
             }
         }
     }
