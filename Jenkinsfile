@@ -4,19 +4,13 @@ pipeline {
     stages {
         stage('Deploy to Nginx') {
             steps {
-                // Copy the Python script to the Nginx FastCGI directory
+                // Copy the Python script to the Nginx web root directory
                 script {
-                    sh 'sudo cp hello.py /var/www/fastcgi/'
+                    sh 'sudo cp hello.py /usr/share/nginx/html/'
                 }
 
-                // Create a FastCGI configuration file
+                // Restart Nginx to apply changes
                 script {
-                    sh 'echo "fastcgi_pass unix:/var/run/fcgiwrap.socket;" | sudo tee /etc/nginx/fastcgi_params'
-                }
-
-                // Configure Nginx to use FastCGI
-                script {
-                    sh 'sudo cp nginx.conf /etc/nginx/sites-available/default'
                     sh 'sudo systemctl restart nginx'
                 }
             }
