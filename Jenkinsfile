@@ -34,7 +34,7 @@ pipeline {
         always {
             // Cleanup: Remove the Docker container
             cleanup {
-                sh 'docker rm -f hello-chatgpt-container || true'
+                sh 'docker rm -f hello-chatgpt-container-test || true'
             }
         }
     }
