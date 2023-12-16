@@ -5,8 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Clean and compile the Java application
-                    sh 'javac HelloChatGPT.java'
+                    // Clean and compile the Java application using Maven
+                    sh 'mvn clean compile'
                 }
             }
         }
