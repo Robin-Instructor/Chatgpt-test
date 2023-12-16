@@ -1,18 +1,14 @@
-# Use an official Python runtime as a parent image
-FROM python:3
+# Use a base image with a Java runtime environment
+FROM openjdk:8-jre-alpine
 
-# Set the working directory to /app
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy the compiled Java application JAR file into the container
+COPY HelloChatGPT.class /app/HelloChatGPT.class
 
-# Make port 80 available to the world outside this container
+# Set the default command to run your Java application
+CMD ["java", "HelloChatGPT"]
+
+# Expose port 80
 EXPOSE 80
-
-# Define environment variable
-ENV NAME World
-
-# Run hello.py when the container launches
-CMD ["python", "hello.py"]
-
