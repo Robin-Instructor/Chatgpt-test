@@ -16,7 +16,7 @@ pipeline {
             steps {
                 // Run the Docker container and expose it on port 80
                 script {
-                    sh 'docker run -it -d -p 80:80 --name hello-container hello-app'
+                    sh 'docker run -d -p 80:80 --name hello-container hello-app'
                 }
             }
         }
