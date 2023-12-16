@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Clean and compile the Java application using Maven
-                    sh 'mvn clean compile'
+                    sh 'mvn clean package'
                 }
             }
         }
