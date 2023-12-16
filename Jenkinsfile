@@ -2,15 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the code from your GitHub repository
-                script {
-                    git 'https://github.com/Robin-Instructor/Chatgpt.git'
-                }
-            }
-        }
-
         stage('Build') {
             steps {
                 // Assuming your Java application requires a build step (e.g., Maven)
