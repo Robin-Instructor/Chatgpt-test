@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Run Docker container and map port 80
-                    sh 'docker run -d -p 80:80 --name hello-chatgpt-container hello-chatgpt'
+                    sh 'docker run -d -p 80:80 --name hello-chatgpt-container-test hello-chatgpt'
                 }
             }
         }
