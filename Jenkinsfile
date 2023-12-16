@@ -2,26 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Expose on Port 80') {
             steps {
-                // Assuming your Java application requires a build step (e.g., Maven)
+                // Start a simple web server on port 80
                 script {
-                    sh 'mvn clean install'
+                    sh 'python -m http.server 80 &'
                 }
             }
         }
+    }
 
-        stage('Deploy') {
-            steps {
-                // Copy the built artifact (e.g., WAR file) to the deployment directory
-                script {
-                    sh 'cp target/your-application.war /var/www/html/'
-                }
-
-                // Restart Nginx to apply changes
-                script {
-                    sh 'sudo systemctl restart nginx'
-                }
+    post {
+        always {
+            // Clean up, stop the web server (if running)
+            script {
+                sh 'pkill -f "python -m http.server"'
             }
         }
     }
