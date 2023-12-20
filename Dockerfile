@@ -11,4 +11,4 @@ COPY HelloChatGPT.class /app/HelloChatGPT.class
 CMD ["java", "HelloChatGPT"]
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 80 
